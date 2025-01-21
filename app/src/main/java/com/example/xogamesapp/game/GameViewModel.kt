@@ -24,7 +24,7 @@ class GameViewModel @Inject constructor(
 data class GameUiState(
     val isLoading: Boolean = false,
     val error: String = "",
-    val size: Int? = 0,
+    val size: Int = 0,
 )
 
 data class GameNavEvent(
