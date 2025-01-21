@@ -13,12 +13,18 @@ class GameViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
 ) : BaseViewModel<GameUiState>(GameUiState()) {
 
+    fun setSize(size: Int) {
+        setState {
+            copy(size = size)
+        }
+    }
 
 }
 
 data class GameUiState(
     val isLoading: Boolean = false,
     val error: String = "",
+    val size: Int? = 0,
 )
 
 data class GameNavEvent(

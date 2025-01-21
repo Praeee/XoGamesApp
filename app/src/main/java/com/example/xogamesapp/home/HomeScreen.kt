@@ -9,6 +9,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,7 +23,7 @@ fun HomeScreen(
     navEvent: HomeNavEvent,
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
-    val uiState = homeViewModel.uiState.value
+    val uiState = homeViewModel.uiState.collectAsState().value
     HomeScreenContent(
         state = uiState,
         onClickStartGame = {

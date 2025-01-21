@@ -9,6 +9,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -20,7 +21,7 @@ fun HistoryScreen(
     navEvent: HistoryNavEvent,
     historyViewModel: HistoryViewModel = hiltViewModel()
 ) {
-    val uiState = historyViewModel.uiState.value
+    val uiState = historyViewModel.uiState.collectAsState().value
     HistoryScreenContent(
         state = uiState,
     )
