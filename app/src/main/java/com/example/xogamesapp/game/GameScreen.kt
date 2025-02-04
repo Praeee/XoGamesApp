@@ -58,8 +58,8 @@ fun GameScreen(
         onClickRestartGame = {
             gameViewModel.setSize(0)
         },
-        onSaveHistoryGame = { history ->
-            gameViewModel.setHistory(history)
+        onSaveHistoryGame = { history , winner ->
+            gameViewModel.setHistory(history,winner)
 //            navEvent.onClickHistory()
         }
     )
@@ -70,7 +70,7 @@ fun GameScreenContent(
     state: GameUiState,
     onSizeChange: (Int) -> Unit = {},
     onClickRestartGame: () -> Unit = {},
-    onSaveHistoryGame: (List<List<MutableState<String>>>) -> Unit = {}
+    onSaveHistoryGame: (List<List<MutableState<String>>>, String) -> Unit = { _, _ -> }
 ) {
     Surface(
         modifier = Modifier
@@ -105,7 +105,9 @@ fun GameScreenContent(
                 }
                 TicTacToeBoard(
                     size = state.size,
-                    onSaveHistoryGame = { onSaveHistoryGame.invoke(it) }
+                    onSaveHistoryGame = { history , winner ->
+                        onSaveHistoryGame.invoke(history , winner)
+                    }
                 )
 
             }
@@ -144,7 +146,7 @@ fun GameSizeInput(
 @Composable
 fun TicTacToeBoard(
     size: Int,
-    onSaveHistoryGame: (List<List<MutableState<String>>>) -> Unit = {}
+    onSaveHistoryGame: (List<List<MutableState<String>>>, String) -> Unit = { _, _ -> }
 ) {
     val board by remember {
         mutableStateOf(List(size) { MutableList(size) { mutableStateOf("") } })
@@ -168,7 +170,7 @@ fun TicTacToeBoard(
                 color = Color.Green,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
-            onSaveHistoryGame.invoke(board)
+            onSaveHistoryGame.invoke(board,it)
         }
 
         for (i in 0 until size) {

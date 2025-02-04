@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt.android)
     kotlin("kapt")
+    alias(libs.plugins.devtools.ksp)
 }
 
 android {
@@ -72,6 +73,14 @@ dependencies {
     implementation (libs.hilt.android)
     kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+
+//    implementation (libs.androidx.hilt.lifecycle.viewmodel)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    annotationProcessor(libs.androidx.room.compiler)
+
+    implementation (libs.gson)
+//    ksp(libs.androidx.room.compiler)
 }
 
 // Allow references to generated code
