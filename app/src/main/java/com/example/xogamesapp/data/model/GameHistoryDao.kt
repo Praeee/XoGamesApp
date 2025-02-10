@@ -9,10 +9,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface GameHistoryDao {
     @Insert
-    suspend fun insertGameHistory(gameHistoryEntity: GameHistoryEntity)
+    fun insertGameHistory(gameHistoryEntity: GameHistoryEntity)
 
     @Update
-    suspend fun updateGameHistory(gameHistoryEntity: GameHistoryEntity)
+    fun updateGameHistory(gameHistoryEntity: GameHistoryEntity)
 
     @Query("SELECT * FROM game_history")
     fun getAllGameHistory(): Flow<List<GameHistoryEntity>>

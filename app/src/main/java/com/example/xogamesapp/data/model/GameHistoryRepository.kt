@@ -1,6 +1,7 @@
 package com.example.xogamesapp.data.model
 
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Singleton
 
 
 interface GameHistoryRepository {
@@ -10,8 +11,8 @@ interface GameHistoryRepository {
     fun getGameById(id: Int): Flow<GameHistoryEntity?>
 }
 
-
-class OfflineGamesRepository(private val gameHistoryDao: GameHistoryDao) : GameHistoryRepository {
+@Singleton
+class GameHistoryRepositoryImpl(private val gameHistoryDao: GameHistoryDao) : GameHistoryRepository {
 
     override suspend fun insertGameHistory(gameHistoryEntity: GameHistoryEntity) {
         gameHistoryDao.insertGameHistory(gameHistoryEntity)

@@ -12,13 +12,21 @@ class MainApplication : Application() {
      */
 //    lateinit var container: AppContainer
 
+    companion object {
+        const val TAG = "MainApplication"
+//        lateinit var database: GameDatabase
+    }
+
     override fun onCreate() {
         super.onCreate()
         Log.d(TAG, "onCreate")
 //        container = AppDataContainer(this)
+//        database = Room.databaseBuilder(
+//            applicationContext,
+//            GameDatabase::class.java,
+//            "game_history_database"
+//        ).build()
+
     }
 
-    companion object {
-        const val TAG = "MainApplication"
-    }
 }

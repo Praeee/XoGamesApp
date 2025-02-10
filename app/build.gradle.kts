@@ -80,6 +80,7 @@ dependencies {
     annotationProcessor(libs.androidx.room.compiler)
 
     implementation (libs.gson)
+    kapt(libs.androidx.room.compiler)
 //    ksp(libs.androidx.room.compiler)
 }
 

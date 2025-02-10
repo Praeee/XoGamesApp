@@ -1,23 +1,32 @@
 package com.example.xogamesapp.game
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.MutableState
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import com.example.xogamesapp.MainApplication
 import com.example.xogamesapp.data.model.GameHistoryEntity
-import com.example.xogamesapp.data.model.GameHistoryRepository
-import com.example.xogamesapp.data.model.OfflineGamesRepository
+import com.example.xogamesapp.domain.InsertGameHistoryUseCase
+import com.example.xogamesapp.game.model.GameHistory
 import com.example.xogamesapp.utils.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import java.time.Instant
+import java.util.Date
 import javax.inject.Inject
 
 @RequiresApi(Build.VERSION_CODES.O)
 @HiltViewModel
 class GameViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-//    private val gamesRepository: GameHistoryRepository
+    private val insertGameHistoryUseCase: InsertGameHistoryUseCase
 ) : BaseViewModel<GameUiState>(GameUiState()) {
 
     fun setSize(size: Int) {
@@ -39,13 +48,21 @@ class GameViewModel @Inject constructor(
 
     private fun saveGameHistory() {
         val state = uiState.value
-        val gameHistoryEntity = GameHistoryEntity(
-            history = state.history,
-            winner = state.winnerName
-        )
-//        viewModelScope.launch {
-//            gamesRepository.insertGameHistory(gameHistoryEntity)
-//        }
+            val request = GameHistory(
+                history = state.history,
+                winner = state.winnerName,
+                createDate = Date.from(Instant.now())
+            )
+            insertGameHistoryUseCase.insertGameHistory(request)
+                .flowOn(Dispatchers.IO)
+                .onStart {
+                    Log.d("GameViewModel", "Start game history")
+                }
+                .onEach {
+                    Log.d("GameViewModel", "Game history inserted")
+                }
+                .launchIn(viewModelScope)
+
     }
 
 }

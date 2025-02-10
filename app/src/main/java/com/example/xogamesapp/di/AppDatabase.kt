@@ -9,8 +9,6 @@ import com.example.xogamesapp.data.model.GameHistoryEntity
 
 //@Database(entities = [GameHistoryEntity::class], exportSchema = true, version = 1)
 //abstract class AppDatabase : RoomDatabase() {
-//    abstract fun gameHistoryDao(): GameHistoryDao
-//
 //    companion object {
 //        @Volatile
 //        private var INSTANCE: AppDatabase? = null
@@ -25,7 +23,7 @@ import com.example.xogamesapp.data.model.GameHistoryEntity
 //                val instance = Room.databaseBuilder(
 //                    context.applicationContext,
 //                    AppDatabase::class.java,
-//                    "game_history_db"
+//                    "game_history_database"
 //                )
 //                    .build()
 //                INSTANCE = instance
