@@ -60,7 +60,6 @@ fun GameScreen(
         },
         onSaveHistoryGame = { history , winner ->
             gameViewModel.setHistory(history,winner)
-//            navEvent.onClickHistory()
         }
     )
 }
@@ -165,7 +164,7 @@ fun TicTacToeBoard(
 
         winner?.let {
             Text(
-                text = "$it Wins!",
+                text = if ((it.contains("X")) or (it.contains("0"))) "$it Wins!" else it,
                 fontSize = 30.sp,
                 color = Color.Green,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -218,8 +217,10 @@ fun checkWinner(board: List<List<MutableState<String>>>, size: Int): String? {
     if ((0 until size).all { board[it][size - it - 1].value == "X" }) return "X"
     if ((0 until size).all { board[it][size - it - 1].value == "O" }) return "O"
 
+    if (board.flatten().all { it.value != "" }) return "Draw"
+
     // No winner
-    return null
+    return  null
 }
 
 @Composable

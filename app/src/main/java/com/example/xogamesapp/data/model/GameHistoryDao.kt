@@ -14,7 +14,7 @@ interface GameHistoryDao {
     @Update
     fun updateGameHistory(gameHistoryEntity: GameHistoryEntity)
 
-    @Query("SELECT * FROM game_history")
+    @Query("SELECT * FROM game_history ORDER BY createDate DESC")
     fun getAllGameHistory(): Flow<List<GameHistoryEntity>>
 
     @Query("SELECT * FROM game_history WHERE id = :id")

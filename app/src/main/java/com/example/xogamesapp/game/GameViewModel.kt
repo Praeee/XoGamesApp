@@ -6,18 +6,17 @@ import androidx.annotation.RequiresApi
 import androidx.compose.runtime.MutableState
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.example.xogamesapp.MainApplication
-import com.example.xogamesapp.data.model.GameHistoryEntity
 import com.example.xogamesapp.domain.InsertGameHistoryUseCase
 import com.example.xogamesapp.game.model.GameHistory
 import com.example.xogamesapp.utils.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.launch
 import java.time.Instant
 import java.util.Date
 import javax.inject.Inject
@@ -60,6 +59,10 @@ class GameViewModel @Inject constructor(
                 }
                 .onEach {
                     Log.d("GameViewModel", "Game history inserted")
+                }
+                .onCompletion {
+                    delay(5000L)
+                    setSize(0)
                 }
                 .launchIn(viewModelScope)
 

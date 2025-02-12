@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -19,7 +20,9 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.xogamesapp.history.widget.HistoryItem
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
@@ -42,44 +45,34 @@ fun HistoryScreenContent(
             .fillMaxSize()
     ) {
         Column(
-            modifier = Modifier.wrapContentSize(),
+            modifier = Modifier.fillMaxSize(),
         ) {
-            Button(
-                onClick = { /*TODO*/ },
+            Text(
+                text = "History",
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
-                    .padding(8.dp)
-            ) {
-                Text(
-                    text = "History!",
-                    modifier = Modifier.padding(8.dp)
-                )
+                    .padding(32.dp),
+                fontSize = 24.sp,
+            )
+            LazyColumn {
+                items(state.historyList.size) { index ->
+                    HistoryItem(
+                        winnerName = state.historyList[index].winner
+                    )
+                }
             }
-
-            PieChart(
-                modifier = Modifier
-                    .size(200.dp)
-                    .padding(8.dp),
-                data = listOf(
-                    "Player 1" to 0.3f,
-                    "Player 2" to 0.2f,
-                    "Player 3" to 0.5f,
-                ),
-                colors = listOf(
-                    Color.Red,
-                    Color.Green,
-                    Color.Blue,
-                )
-            )
-
-            LineChart(
-                modifier = Modifier
-                    .size(200.dp)
-                    .padding(8.dp),
-                data = listOf(0.1f, 0.2f, 0.3f, 0.4f, 0.5f),
-                color = Color.Red
-            )
-
+//            state.historyList.forEach { history ->
+//                HistoryItem(
+//                    winnerName = history.winner
+//                )
+//                LineChart(
+//                    modifier = Modifier
+//                        .size(200.dp)
+//                        .padding(16.dp),
+//                    data = history.history.map { it.size.toFloat() },
+//                    color = Color.Blue
+//                )
+//            }
         }
     }
 }
