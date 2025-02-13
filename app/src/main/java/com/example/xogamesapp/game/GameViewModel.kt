@@ -50,7 +50,7 @@ class GameViewModel @Inject constructor(
             val request = GameHistory(
                 history = state.history,
                 winner = state.winnerName,
-                createDate = Date.from(Instant.now())
+                createDate = Date.from(Instant.now()),
             )
             insertGameHistoryUseCase.insertGameHistory(request)
                 .flowOn(Dispatchers.IO)

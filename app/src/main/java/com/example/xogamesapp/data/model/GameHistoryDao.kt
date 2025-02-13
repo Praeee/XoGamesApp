@@ -18,5 +18,5 @@ interface GameHistoryDao {
     fun getAllGameHistory(): Flow<List<GameHistoryEntity>>
 
     @Query("SELECT * FROM game_history WHERE id = :id")
-    fun getGameById(id: Int): Flow<GameHistoryEntity?>
+    fun getGameById(id: Int): Flow<GameHistoryEntity>
 }

@@ -8,7 +8,7 @@ interface GameHistoryRepository {
     suspend fun insertGameHistory(gameHistoryEntity: GameHistoryEntity)
     suspend fun updateGameHistory(gameHistoryEntity: GameHistoryEntity)
     fun getAllGameHistory(): Flow<List<GameHistoryEntity>>
-    fun getGameById(id: Int): Flow<GameHistoryEntity?>
+    fun getGameById(id: Int): Flow<GameHistoryEntity>
 }
 
 @Singleton
@@ -26,7 +26,7 @@ class GameHistoryRepositoryImpl(private val gameHistoryDao: GameHistoryDao) : Ga
         return gameHistoryDao.getAllGameHistory()
     }
 
-    override fun getGameById(id: Int): Flow<GameHistoryEntity?> {
+    override fun getGameById(id: Int): Flow<GameHistoryEntity> {
         return gameHistoryDao.getGameById(id)
     }
 

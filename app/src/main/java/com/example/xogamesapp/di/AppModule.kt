@@ -2,6 +2,8 @@ package com.example.xogamesapp.di
 
 import com.example.xogamesapp.domain.GetAllGameHistoryUseCase
 import com.example.xogamesapp.domain.GetAllGameHistoryUseCaseImpl
+import com.example.xogamesapp.domain.GetGameHistoryByIdUseCase
+import com.example.xogamesapp.domain.GetGameHistoryByIdUseCaseImpl
 import com.example.xogamesapp.domain.InsertGameHistoryUseCase
 import com.example.xogamesapp.domain.InsertGameHistoryUseCaseImpl
 import dagger.Binds
@@ -23,5 +25,10 @@ abstract class DomainSingletonModule {
     abstract fun bindsGetAllGameHistoryUseCase(
         getAllGameHistoryUseCaseImpl: GetAllGameHistoryUseCaseImpl
     ): GetAllGameHistoryUseCase
+
+    @Binds
+    abstract fun bindsGetGameHistoryByIdUseCase(
+        getGameHistoryByIdUseCaseImpl: GetGameHistoryByIdUseCaseImpl
+    ): GetGameHistoryByIdUseCase
 
 }

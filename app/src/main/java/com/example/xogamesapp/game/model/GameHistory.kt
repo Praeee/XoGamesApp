@@ -4,6 +4,7 @@ import com.example.xogamesapp.data.model.GameHistoryEntity
 import java.util.Date
 
 data class GameHistory(
+    val id: Int = 0,
     val history: List<List<String>>,
     val winner: String,
     val createDate: Date
@@ -11,6 +12,7 @@ data class GameHistory(
 
 fun GameHistory.toEntity(): GameHistoryEntity {
     return GameHistoryEntity(
+        id = id,
         history = history,
         winner = winner,
         createDate = createDate
@@ -19,6 +21,7 @@ fun GameHistory.toEntity(): GameHistoryEntity {
 
 fun GameHistoryEntity.toGameHistory(): GameHistory {
     return GameHistory(
+        id = id,
         history = history,
         winner = winner,
         createDate = createDate

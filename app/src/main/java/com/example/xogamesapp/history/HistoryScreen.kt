@@ -1,6 +1,8 @@
 package com.example.xogamesapp.history
 
 import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.xogamesapp.history.widget.HistoryItem
 
+@RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun HistoryScreen(
@@ -33,12 +36,16 @@ fun HistoryScreen(
     val uiState = historyViewModel.uiState.collectAsState().value
     HistoryScreenContent(
         state = uiState,
+        onClickItem = {
+            historyViewModel.getHistoryItem(it)
+        }
     )
 }
 
 @Composable
 fun HistoryScreenContent(
     state: HistoryUiState,
+    onClickItem : (id : Int) -> Unit = {}
 ) {
     Surface(
         modifier = Modifier
@@ -57,7 +64,8 @@ fun HistoryScreenContent(
             LazyColumn {
                 items(state.historyList.size) { index ->
                     HistoryItem(
-                        winnerName = state.historyList[index].winner
+                        winnerName = state.historyList[index].winner,
+                        onClickItem = { onClickItem.invoke(state.historyList[index].id) }
                     )
                 }
             }
