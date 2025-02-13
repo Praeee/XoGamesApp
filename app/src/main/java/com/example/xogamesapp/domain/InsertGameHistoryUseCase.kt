@@ -12,12 +12,12 @@ fun interface InsertGameHistoryUseCase {
 }
 
 class InsertGameHistoryUseCaseImpl @Inject constructor(
-    private val repository: GameHistoryRepository
+    private val repository: GameHistoryRepository,
 ) : InsertGameHistoryUseCase {
     override fun insertGameHistory(gameHistory: GameHistory): Flow<Unit> {
-        val gameHistory = gameHistory.toEntity()
+        val gameHistoryMapper = gameHistory.toEntity()
         return flow {
-            emit(repository.insertGameHistory(gameHistory))
+            emit(repository.insertGameHistory(gameHistoryMapper))
         }
     }
 }

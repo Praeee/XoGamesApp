@@ -17,7 +17,7 @@ fun GameHistory.toEntity(): GameHistoryEntity {
     )
 }
 
-fun GameHistoryEntity.toModel(): GameHistory {
+fun GameHistoryEntity.toGameHistory(): GameHistory {
     return GameHistory(
         history = history,
         winner = winner,
