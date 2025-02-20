@@ -51,7 +51,9 @@ fun AppNavigationGraph(
         )
         historyScreen(
             navEvent = HistoryNavEvent(
-
+                onNavigateBack = {
+                    navController.navigateToHistoryScreen()
+                }
             )
         )
         gameScreen(

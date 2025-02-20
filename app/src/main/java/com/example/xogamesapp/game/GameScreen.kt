@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.xogamesapp.game.widget.TicTacToeCell
 
 @RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("StateFlowValueCalledInComposition")
@@ -223,23 +224,6 @@ fun checkWinner(board: List<List<MutableState<String>>>, size: Int): String? {
     return  null
 }
 
-@Composable
-fun TicTacToeCell(symbol: String, cellSize: Dp, onClick: () -> Unit) {
-    Box(
-        modifier = Modifier
-            .size(cellSize)
-            .border(1.dp, Color.Black)
-            .clickable { onClick() },
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = symbol,
-            fontSize = 32.sp,
-            fontWeight = FontWeight.Bold,
-            color = if (symbol == "X") Color.Red else Color.Blue
-        )
-    }
-}
 
 
 @Preview

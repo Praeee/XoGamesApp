@@ -47,11 +47,19 @@ class HistoryViewModel @Inject constructor(
                 setState {
                     copy(
                         isLoading = false,
-                        history = history
+                         history = history
                     )
                 }
             }
             .launchIn(viewModelScope)
+    }
+
+    fun clearHistory() {
+        setState {
+            copy(
+                history = null
+            )
+        }
     }
 
 
