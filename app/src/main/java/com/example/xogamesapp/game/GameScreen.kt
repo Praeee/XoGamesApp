@@ -165,7 +165,7 @@ fun TicTacToeBoard(
 
         winner?.let {
             Text(
-                text = if ((it.contains("X")) or (it.contains("0"))) "$it Wins!" else it,
+                text = if ((it.contains("X")) or (it.contains("O"))) "$it Wins!" else it,
                 fontSize = 30.sp,
                 color = Color.Green,
                 modifier = Modifier.align(Alignment.CenterHorizontally)

@@ -1,5 +1,7 @@
 package com.example.xogamesapp.di
 
+import com.example.xogamesapp.domain.DeleteGameHistoryByIdUseCase
+import com.example.xogamesapp.domain.DeleteGameHistoryByIdUseCaseImpl
 import com.example.xogamesapp.domain.GetAllGameHistoryUseCase
 import com.example.xogamesapp.domain.GetAllGameHistoryUseCaseImpl
 import com.example.xogamesapp.domain.GetGameHistoryByIdUseCase
@@ -30,5 +32,10 @@ abstract class DomainSingletonModule {
     abstract fun bindsGetGameHistoryByIdUseCase(
         getGameHistoryByIdUseCaseImpl: GetGameHistoryByIdUseCaseImpl
     ): GetGameHistoryByIdUseCase
+
+    @Binds
+    abstract fun bindsDeleteGameHistoryByIdUseCase(
+        deleteGameHistoryByIdUseCaseImpl: DeleteGameHistoryByIdUseCaseImpl
+    ): DeleteGameHistoryByIdUseCase
 
 }

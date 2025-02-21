@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Icon
@@ -59,7 +60,7 @@ fun HistoryScreen(
             historyViewModel.getHistoryItem(it)
         },
         onDeleteHistoryItem = {
-            //historyViewModel.deleteHistoryItem(it)
+            historyViewModel.deleteHistoryItem(it)
         },
         onClearHistory = {
             historyViewModel.clearHistory()
@@ -145,11 +146,15 @@ fun HistoryScreenContent(
                     fontSize = 24.sp,
                 )
 
-                LazyColumn {
-                    items(state.historyList.size ) { index ->
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                ) {
+                    items(state.historyList, key = { it.id }) { history ->
                         HistoryItem(
-                            winnerName = state.historyList[index].winner,
-                            onClickItem = { onClickItem.invoke(state.historyList[index].id) }
+                            winnerName = history.winner,
+                            onClickItem = { onClickItem.invoke(history.id) },
+                            onDeleteItem = { onDeleteHistoryItem.invoke(history.id) },
+                            id = history.id
                         )
                     }
                 }
