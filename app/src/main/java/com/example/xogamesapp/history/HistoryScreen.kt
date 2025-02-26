@@ -18,8 +18,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -44,6 +46,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.xogamesapp.game.model.GameHistory
 import com.example.xogamesapp.history.widget.HistoryGrid
 import com.example.xogamesapp.history.widget.HistoryItem
+import com.example.xogamesapp.history.widget.HistoryItemDialog
 import java.util.Date
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -82,56 +85,10 @@ fun HistoryScreenContent(
 
     ) {
         if (state.history != null) {
-            Dialog(
-                properties = DialogProperties(
-                    dismissOnBackPress = true,
-                    dismissOnClickOutside = true
-                ),
-                onDismissRequest = {
-                    onClearHistory.invoke()
-                }
-            ) {
-                Column(
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .wrapContentSize()
-                        .background(Color.White)
-                        .clip(MaterialTheme.shapes.medium)
-                        .border(2.dp, Color.LightGray, MaterialTheme.shapes.medium)
-                ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.End
-                    ) {
-
-                        Icon(
-                            imageVector = Icons.Default.Close,
-                            contentDescription = "Clear History",
-                            modifier = Modifier
-                                .clickable { onClearHistory.invoke() }
-                                .padding(32.dp)
-                        )
-                    }
-
-                    Row(
-                        modifier = Modifier.fillMaxWidth()
-                            .padding(8.dp),
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        Text(
-                            text = "Winner is : ${state.history.winner}",
-                            fontSize = 24.sp,
-                            color = MaterialTheme.colorScheme.onSurface,
-                        )
-                    }
-
-                    HistoryGrid(
-                        history = state.history.history.map { row -> row.map { mutableStateOf(it) } },
-                        size = state.history.history.size
-                    )
-                }
-            }
-
+            HistoryItemDialog(
+                state = state.history,
+                onClearHistory = onClearHistory
+            )
         } else {
             Column(
                 modifier = Modifier.fillMaxSize(),
@@ -149,12 +106,11 @@ fun HistoryScreenContent(
                 LazyColumn(
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
-                    items(state.historyList, key = { it.id }) { history ->
+                    itemsIndexed(items = state.historyList, key = { _, item ->  item.id  }) { _ , history ->
                         HistoryItem(
-                            winnerName = history.winner,
+                            history = history,
                             onClickItem = { onClickItem.invoke(history.id) },
                             onDeleteItem = { onDeleteHistoryItem.invoke(history.id) },
-                            id = history.id
                         )
                     }
                 }

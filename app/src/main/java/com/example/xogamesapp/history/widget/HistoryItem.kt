@@ -1,6 +1,8 @@
 package com.example.xogamesapp.history.widget
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -13,45 +15,65 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.xogamesapp.game.model.GameHistory
 
 @Composable
 fun HistoryItem(
-    id : Int,
-    winnerName : String,
+    history: GameHistory,
     onClickItem : () -> Unit = {},
     onDeleteItem : (Int) -> Unit = {}
 ) {
     Card(
         modifier = Modifier
-            .fillMaxWidth()
             .padding(8.dp)
             .clickable {
                 onClickItem()
             }
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = androidx.compose.foundation.layout.Arrangement.SpaceBetween
+        Column(
+            modifier = Modifier
+                .background(
+                    color = if (history.winner == "X") androidx.compose.ui.graphics.Color(0xFFBBDFC8)
+                    else androidx.compose.ui.graphics.Color(0xFFF0E5D8)
+                )
+                .padding(8.dp)
+                .padding(vertical = 4.dp)
         ) {
+            Row(
+                modifier = Modifier.fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                horizontalArrangement = androidx.compose.foundation.layout.Arrangement.SpaceBetween
+            ) {
+                Text(
+                    modifier = Modifier,
+                    textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+                    fontStyle = androidx.compose.ui.text.font.FontStyle.Normal,
+                    text = "Winner is -> ${history.winner}"
+                )
+
+                Icon(
+                    modifier = Modifier
+                        .clickable {
+                            onDeleteItem(history.id)
+                        },
+                    tint = androidx.compose.ui.graphics.Color.Red,
+                    imageVector = Icons.Default.Delete,
+                    contentDescription = "Delete",
+                )
+            }
+
             Text(
                 modifier = Modifier
-                    .padding(16.dp),
+                    .padding(horizontal = 16.dp),
+                fontSize = 12.sp,
                 textAlign = androidx.compose.ui.text.style.TextAlign.Center,
                 fontStyle = androidx.compose.ui.text.font.FontStyle.Normal,
-                text = "Winner is -> $winnerName"
+                text = "${history.createDate}"
             )
 
-            Icon(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .clickable {
-                        onDeleteItem(id)
-                    },
-                tint = androidx.compose.ui.graphics.Color.Red,
-                imageVector = Icons.Default.Delete,
-                contentDescription = "Delete",
-            )
         }
+
 
     }
 }
@@ -60,7 +82,15 @@ fun HistoryItem(
 @Composable
 fun PreviewHistoryItem() {
     HistoryItem(
-        winnerName = "X",
-        id = 1
+        history = GameHistory(
+            id = 1,
+            history = listOf(
+                listOf("X", "O", "X"),
+                listOf("O", "X", "O"),
+                listOf("X", "O", "X")
+            ),
+            winner = "X",
+            createDate = java.util.Date()
+        )
     )
 }
