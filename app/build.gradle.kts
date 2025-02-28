@@ -82,6 +82,16 @@ dependencies {
     implementation (libs.gson)
     kapt(libs.androidx.room.compiler)
 //    ksp(libs.androidx.room.compiler)
+
+    implementation (libs.androidx.camera.core)
+    implementation (libs.androidx.camera.camera2)
+    implementation (libs.androidx.camera.lifecycle)
+    implementation (libs.androidx.camera.video)
+
+    implementation (libs.androidx.camera.view)
+    implementation (libs.androidx.camera.extensions)
+
+
 }
 
 // Allow references to generated code
