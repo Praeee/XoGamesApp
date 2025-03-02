@@ -5,7 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.util.Date
 
-class GameHistoryConverters {
+class Converters {
     @TypeConverter
     fun fromHistory(history: List<List<String>>): String {
         val gson = Gson()
@@ -13,7 +13,7 @@ class GameHistoryConverters {
     }
 
     @TypeConverter
-    fun toHistory(historyString: String): List<List<String>> {
+    fun toHistory(historyString: String?): List<List<String>> {
         val gson = Gson()
         val type = object : TypeToken<List<List<String>>>() {}.type
         return gson.fromJson(historyString, type)

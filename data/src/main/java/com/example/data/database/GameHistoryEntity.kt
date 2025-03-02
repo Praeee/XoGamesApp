@@ -3,11 +3,11 @@ package com.example.data.database
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.example.data.GameHistoryConverters
+import com.example.data.Converters
 import java.util.Date
 
 @Entity(tableName = "game_history")
-@TypeConverters(GameHistoryConverters::class)
+@TypeConverters(Converters::class)
 data class GameHistoryEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val history: List<List<String>>,  // 2D list to store game board states
