@@ -1,8 +1,9 @@
-package com.example.xogamesapp.data.model
+package com.example.data.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
+import com.example.data.GameHistoryConverters
 import java.util.Date
 
 @Entity(tableName = "game_history")

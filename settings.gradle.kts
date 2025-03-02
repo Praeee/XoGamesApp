@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "XoGamesApp"
 include(":app")
- 
+include(":data")

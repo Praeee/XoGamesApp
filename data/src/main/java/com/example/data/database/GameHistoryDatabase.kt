@@ -1,4 +1,4 @@
-package com.example.xogamesapp.data.model
+package com.example.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

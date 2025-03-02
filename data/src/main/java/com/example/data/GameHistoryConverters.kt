@@ -1,4 +1,4 @@
-package com.example.xogamesapp.data.model
+package com.example.data
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

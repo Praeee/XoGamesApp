@@ -1,4 +1,4 @@
-package com.example.xogamesapp.data.model
+package com.example.data.database
 
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Singleton

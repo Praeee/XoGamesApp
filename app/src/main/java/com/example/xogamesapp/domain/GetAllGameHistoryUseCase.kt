@@ -1,6 +1,6 @@
 package com.example.xogamesapp.domain
 
-import com.example.xogamesapp.data.model.GameHistoryRepository
+import com.example.data.database.GameHistoryRepository
 import com.example.xogamesapp.game.model.GameHistory
 import com.example.xogamesapp.mapper.AppDataMappers
 import kotlinx.coroutines.flow.Flow

@@ -1,12 +1,7 @@
-package com.example.xogamesapp.di
+package com.example.data.database
 
 import android.app.Application
 import androidx.room.Room
-import com.example.xogamesapp.data.model.GameDatabase
-import com.example.xogamesapp.data.model.GameHistoryDao
-import com.example.xogamesapp.data.model.GameHistoryRepository
-import com.example.xogamesapp.data.model.GameHistoryRepositoryImpl
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,6 +1,6 @@
 package com.example.xogamesapp.di
 
-import com.example.xogamesapp.data.model.GameHistoryEntity
+import com.example.data.database.GameHistoryEntity
 import com.example.xogamesapp.game.model.GameHistory
 import com.example.xogamesapp.game.model.toEntity
 import com.example.xogamesapp.game.model.toGameHistory

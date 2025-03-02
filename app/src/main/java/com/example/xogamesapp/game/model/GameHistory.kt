@@ -1,6 +1,6 @@
 package com.example.xogamesapp.game.model
 
-import com.example.xogamesapp.data.model.GameHistoryEntity
+import com.example.data.database.GameHistoryEntity
 import java.util.Date
 
 data class GameHistory(

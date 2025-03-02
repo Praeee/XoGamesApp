@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
+    implementation(project(":data"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -74,14 +75,12 @@ dependencies {
     kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
-//    implementation (libs.androidx.hilt.lifecycle.viewmodel)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     annotationProcessor(libs.androidx.room.compiler)
 
     implementation (libs.gson)
     kapt(libs.androidx.room.compiler)
-//    ksp(libs.androidx.room.compiler)
 
     implementation (libs.androidx.camera.core)
     implementation (libs.androidx.camera.camera2)
@@ -91,10 +90,8 @@ dependencies {
     implementation (libs.androidx.camera.view)
     implementation (libs.androidx.camera.extensions)
 
-
 }
 
-// Allow references to generated code
 kapt {
     correctErrorTypes = true
 }
